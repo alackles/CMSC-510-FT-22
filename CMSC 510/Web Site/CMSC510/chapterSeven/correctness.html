@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href="../../bootstrap.min.css" rel="stylesheet" type="text/css">
+<title>Correctness for Quicksort</title>
+</head>
+<body>
+<div class="container">
+<h3>The Quicksort algorithm</h3>
+<pre>
+QUICKSORT(A,p,r)
+  if p &lt; r
+    q = PARTITION(A,p,r)
+    QUICKSORT(A,p,q-1)
+    QUICKSORT(A,q+1,r)
+
+PARTITION(A,p,r)
+  x = A[r]
+  i = p-1
+  for j = p to r-1
+    if A[j] &lt;= x
+      i = i + 1
+      exchange A[i] with A[j]
+  exchange A[i+1] with A[r]
+  return i + 1
+</pre>
+<p class="text-center"><img src="correctness1.png"/></p>
+<h3>Proof of correctness for Quicksort</h3>
+<p>The proof of correctness for Quicksort is actually two proofs, a proof that Partition does the right thing and a proof that Quicksort does the right thing.</p>
+<p>The proof of correctness for Partition is a fairly standard proof involving a loop invariant. The appropriate invariant is</p>
+<p class="text-center"><i>A</i>[<i>p</i>..<i>i</i>] &#8804; <i>x</i> and <i>A</i>[<i>i</i>+1..<i>j</i>-1] &gt; <i>x</i></p>
+<p>The text does a very good job of working out the details of that proof of correctness, so I refer you to that.</p>
+<p>As for the correctness of Quicksort itself, we now have to contend with something completely new: how to produce a proof of correctness for a recursive algorithm. The proof technique is surprisingly simple and straightforward.</p>
+<p><b>Theorem</b> <code>Quicksort(A,p,r)</code> can correctly sort <i>A</i>[<i>p</i>..<i>r</i>] in ascending order.</p>
+<p><b>Proof</b> The proof is a proof by induction on the length of the array, |<i>r</i> - <i>p</i> + 1|:</p>
+<ol>
+<li>When <i>p</i> = <i>r</i> Quicksort does nothing, which is the correct thing to do when sorting an array of length 1.</li>
+<li>Assuming that Quicksort can correctly sort any array of length <i>n</i> or less, we show that it can correctly sort an array of
+length <i>n</i>+1. The partition step that comes first will partition the array of length <i>n</i>+1 into two subarrays and a pivot.
+That is, we end up with <i>A</i>[<i>p</i>..<i>q</i>-1] &#8804; <i>A</i>[<i>q</i>] &lt; <i>A</i>[<i>q</i>+1..<i>r</i>]. The largest of
+these subarrays will have length <i>n</i> or less, so the induction hypothesis tells us that the recursive calls to Quicksort will
+correctly sort the two subarrays. Once the subarrays are sorted we are done.</li>
+</ol>
+</div>
+</body>
+</html>

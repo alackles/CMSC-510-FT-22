@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href="../bootstrap.min.css" rel="stylesheet" type="text/css">
+<title>Bin Packing</title>
+</head>
+<body>
+<div class="container">
+<h3>The bin packing problem</h3>
+<p>Start by reading problem 35-1 in the textbook. This problem describes the bin-packing problem and gives one suggestion for getting an approximately optimal solution, the first-fit heuristic.</p>
+<p>Here is another, less effective algorithm for doing bin packing:</p>
+<ol>
+<li>Start with one open bin that has no items in it.</li>
+<li>Scan across the items from left to right.</li>
+<li>Each time you come to a new item, try to put it in the current open bin. If it fits, put it in the bin.</li>
+<li>If the next item does not fit in the current open bin, close that bin and open a new, empty bin to put the item in.</li>
+</ol>
+<h3>What to do</h3>
+<p>Write a program that generates a random list of 12 items to be packed. The items should have integer weights randomly selected from the range 1-12. The bins have a maximum capacity of 20.</p>
+<p>Start by trying to pack the items using the crude algorithm outlined above. Have your program print a count of how many bins were needed and print a listing of the items in each bin.</p>
+<p>Next, try packing the items again using the first-fit heuristic described in problem 35-1. Print the number of bins required and what items are in each bin.</p>
+<p>Finally, try using the crude algorithm in combination with some logic that tries every possible permutation of the 12 items. Have your program print the best packing it can find by that method. 12! is approximately 480 million, so give your program enough time to cycle through all the permutations.</p>
+<h3>Generating permutations</h3>
+<p>Here is some code to demonstrate how to generate and print all possible permutations of list of N items.</p>
+<pre>
+void swap(std::vector&lt;int&gt;&amp; A, int i, int j) {
+  if (i != j) {
+    int temp = A[i];
+    A[i] = A[j];
+    A[j] = temp;
+  }
+}
+
+void permute(std::vector&lt;int&gt;&amp; A, int k) {
+  if (k == N - 1)
+    print(A);
+  else {
+    for (int j = k; j &lt; N; j++) {
+      swap(A, j, k);
+      permute(A, k + 1);
+      swap(A, j, k);
+    }
+  }
+}
+
+void printPermutations(std::vector&lt;int&gt;&amp; A) {
+  permute(A,0);
+}
+</pre>
+</div>
+</body>
+</html>

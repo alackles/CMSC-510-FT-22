@@ -1,0 +1,302 @@
+(************** Content-type: application/mathematica **************
+                     CreatedBy='Mathematica 5.0'
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used with any Mathematica-compatible
+application, such as Mathematica, MathReader or Publicon. The data
+for the notebook starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do
+one of the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the
+  application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing
+the word CacheID, otherwise Mathematica-compatible applications may
+try to use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+*******************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[      8454,        222]*)
+(*NotebookOutlinePosition[      9089,        244]*)
+(*  CellTagsIndexPosition[      9045,        240]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+Cell[BoxData[
+    \(BigRandom[size_]\  := \ \ Join[Table[0, {size}], 
+        Table[Random[Integer, {0, 9}], {size}]]\)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(n\  = \ BigRandom[10]\)], "Input"],
+
+Cell[BoxData[
+    \({0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 4, 0, 2, 3, 0, 5, 8, 9, 
+      2}\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(m\  = BigRandom[10]\)], "Input"],
+
+Cell[BoxData[
+    \({0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 7, 2, 8, 0, 9, 7, 6, 3, 
+      9}\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(a\  = \ 
+      Fourier[Reverse[n], FourierParameters \[Rule] {1, \(-1\)}]\)], "Input"],
+
+Cell[BoxData[
+    \({\(\(38.`\)\(\[InvisibleSpace]\)\) + 
+        0.`\ \[ImaginaryI], \(\(11.361186315392874`\)\(\[InvisibleSpace]\)\) \
+- 20.326858953223983`\ \[ImaginaryI], \(\(10.871322893124002`\)\(\
+\[InvisibleSpace]\)\) - 
+        9.73507915124133`\ \[ImaginaryI], \(-0.022175561055771453`\) - 
+        20.1084305840809`\ \[ImaginaryI], \(-3.8090169943749475`\) - 
+        5.1185538454784485`\ \[ImaginaryI], \(-4.`\) - 
+        12.`\ \[ImaginaryI], \(-10.371322893124002`\) + 
+        3.3879542380419516`\ \[ImaginaryI], \(\(4.786107583555982`\)\(\
+\[InvisibleSpace]\)\) + 
+        0.3657847978328963`\ \[ImaginaryI], \(-2.6909830056250534`\) - 
+        4.477768030049993`\ \[ImaginaryI], \(-2.1251183378930856`\) - 
+        2.4157868330240166`\ \[ImaginaryI], \(-6.`\) + 
+        0.`\ \[ImaginaryI], \(-2.1251183378930856`\) + 
+        2.4157868330240166`\ \[ImaginaryI], \(-2.6909830056250534`\) + 
+        4.477768030049993`\ \[ImaginaryI], \(\(4.786107583555982`\)\(\
+\[InvisibleSpace]\)\) - 
+        0.3657847978328963`\ \[ImaginaryI], \(-10.371322893124002`\) - 
+        3.3879542380419516`\ \[ImaginaryI], \(-4.`\) + 
+        12.`\ \[ImaginaryI], \(-3.8090169943749475`\) + 
+        5.1185538454784485`\ \[ImaginaryI], \(-0.022175561055771453`\) + 
+        20.1084305840809`\ \[ImaginaryI], \(\(10.871322893124002`\)\(\
+\[InvisibleSpace]\)\) + 
+        9.73507915124133`\ \[ImaginaryI], \(\(11.361186315392874`\)\(\
+\[InvisibleSpace]\)\) + 20.326858953223983`\ \[ImaginaryI]}\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(b\  = \ 
+      Fourier[Reverse[m], FourierParameters \[Rule] {1, \(-1\)}]\)], "Input"],
+
+Cell[BoxData[
+    \({\(\(52.`\)\(\[InvisibleSpace]\)\) + 
+        0.`\ \[ImaginaryI], \(\(13.341039294052672`\)\(\[InvisibleSpace]\)\) \
+- 32.32638998369407`\ \[ImaginaryI], \(-0.2811529493745269`\) - 
+        5.567581822058034`\ \[ImaginaryI], \(\(4.9202879231091785`\)\(\
+\[InvisibleSpace]\)\) - 
+        8.38860634973927`\ \[ImaginaryI], \(-2.3090169943749466`\) + 
+        2.575654997459685`\ \[ImaginaryI], \(\(11.`\)\(\[InvisibleSpace]\)\) \
++ 5.`\ \[ImaginaryI], \(\(9.781152949374526`\)\(\[InvisibleSpace]\)\) - 
+        0.5020285397155684`\ \[ImaginaryI], \(\(12.079712076890821`\)\(\
+\[InvisibleSpace]\)\) - 
+        3.645835504009365`\ \[ImaginaryI], \(-1.1909830056250528`\) - 
+        6.294124350063394`\ \[ImaginaryI], \(\(3.6589607059473277`\)\(\
+\[InvisibleSpace]\)\) + 
+        15.291948129945443`\ \[ImaginaryI], \(\(26.`\)\(\[InvisibleSpace]\)\) \
++ 0.`\ \[ImaginaryI], \(\(3.6589607059473277`\)\(\[InvisibleSpace]\)\) - 
+        15.291948129945443`\ \[ImaginaryI], \(-1.1909830056250528`\) + 
+        6.294124350063394`\ \[ImaginaryI], \(\(12.079712076890821`\)\(\
+\[InvisibleSpace]\)\) + 
+        3.645835504009365`\ \[ImaginaryI], \(\(9.781152949374526`\)\(\
+\[InvisibleSpace]\)\) + 
+        0.5020285397155684`\ \[ImaginaryI], \(\(11.`\)\(\[InvisibleSpace]\)\) \
+- 5.`\ \[ImaginaryI], \(-2.3090169943749466`\) - 
+        2.575654997459685`\ \[ImaginaryI], \(\(4.9202879231091785`\)\(\
+\[InvisibleSpace]\)\) + 
+        8.38860634973927`\ \[ImaginaryI], \(-0.2811529493745269`\) + 
+        5.567581822058034`\ \[ImaginaryI], \(\(13.341039294052672`\)\(\
+\[InvisibleSpace]\)\) + 32.32638998369407`\ \[ImaginaryI]}\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(c\  = \ a*b\)], "Input"],
+
+Cell[BoxData[
+    \({\(\(1976.`\)\(\[InvisibleSpace]\)\) + 
+        0.`\ \[ImaginaryI], \(-505.5239366047521`\) - 
+        638.4475635284259`\ \[ImaginaryI], \(-57.25735421375201`\) - 
+        57.789933505714586`\ \[ImaginaryI], \(-168.79081862616326`\) - 
+        98.75324610325102`\ \[ImaginaryI], \(\(21.978713763747788`\)\(\
+\[InvisibleSpace]\)\) + 
+        2.0081141588622686`\ \[ImaginaryI], \(\(16.`\)\(\[InvisibleSpace]\)\) \
+- 152.`\ \[ImaginaryI], \(-99.742645786248`\) + 
+        38.34479867472365`\ \[ImaginaryI], \(\(59.148392781146`\)\(\
+\[InvisibleSpace]\)\) - 
+        13.03078591421176`\ \[ImaginaryI], \(-24.978713763747795`\) + 
+        22.270327288232142`\ \[ImaginaryI], \(\(29.16636244976954`\)\(\
+\[InvisibleSpace]\)\) - 41.336468489036754`\ \[ImaginaryI], \(-156.`\) + 
+        0.`\ \[ImaginaryI], \(\(29.16636244976954`\)\(\[InvisibleSpace]\)\) + 
+        41.336468489036754`\ \[ImaginaryI], \(-24.978713763747795`\) - 
+        22.270327288232142`\ \[ImaginaryI], \(\(59.148392781146`\)\(\
+\[InvisibleSpace]\)\) + 
+        13.03078591421176`\ \[ImaginaryI], \(-99.742645786248`\) - 
+        38.34479867472365`\ \[ImaginaryI], \(\(16.`\)\(\[InvisibleSpace]\)\) \
++ 152.`\ \[ImaginaryI], \(\(21.978713763747788`\)\(\[InvisibleSpace]\)\) - 
+        2.0081141588622686`\ \[ImaginaryI], \(-168.79081862616326`\) + 
+        98.75324610325102`\ \[ImaginaryI], \(-57.25735421375201`\) + 
+        57.789933505714586`\ \[ImaginaryI], \(-505.5239366047521`\) + 
+        638.4475635284259`\ \[ImaginaryI]}\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(d\  = \ 
+      InverseFourier[c, FourierParameters \[Rule] {1, \(-1\)}]\)], "Input"],
+
+Cell[BoxData[
+    \({18.00000000000001`, 87.00000000000001`, 111.`, 137.`, 144.`, 194.`, 
+      149.99999999999997`, 144.99999999999997`, 165.`, 219.`, 
+      131.99999999999997`, 124.99999999999999`, 98.`, 70.00000000000001`, 
+      49.000000000000014`, 50.00000000000001`, 38.`, 39.00000000000003`, 
+      5.000000000000023`, 2.2737367544323207`*^-14}\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(d\  = \ Map[Round, Reverse[d]]\)], "Input"],
+
+Cell[BoxData[
+    \({0, 5, 39, 38, 50, 49, 70, 98, 125, 132, 219, 165, 145, 150, 194, 144, 
+      137, 111, 87, 18}\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(result1\  = \ FromDigits[d]\)], "Input"],
+
+Cell[BoxData[
+    \(9335712057120988988\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(result2\  = \ FromDigits[n]*FromDigits[m]\)], "Input"],
+
+Cell[BoxData[
+    \(9335712057120988988\)], "Output"]
+}, Open  ]],
+
+Cell[BoxData[
+    \(result1\  - \ result2\)], "Input"]
+},
+FrontEndVersion->"5.0 for Macintosh",
+ScreenRectangle->{{0, 1280}, {0, 998}},
+WindowSize->{604, 900},
+WindowMargins->{{1, Automatic}, {Automatic, 1}}
+]
+
+(*******************************************************************
+Cached data follows.  If you edit this Notebook file directly, not
+using Mathematica, you must remove the line containing CacheID at
+the top of  the file.  The cache data will then be recreated when
+you save this file from within Mathematica.
+*******************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+
+(*NotebookFileOutline
+Notebook[{
+Cell[1754, 51, 130, 2, 43, "Input"],
+
+Cell[CellGroupData[{
+Cell[1909, 57, 54, 1, 27, "Input"],
+Cell[1966, 60, 101, 2, 27, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[2104, 67, 52, 1, 27, "Input"],
+Cell[2159, 70, 101, 2, 27, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[2297, 77, 106, 2, 27, "Input"],
+Cell[2406, 81, 1503, 25, 107, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[3946, 111, 106, 2, 27, "Input"],
+Cell[4055, 115, 1647, 27, 107, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[5739, 147, 44, 1, 27, "Input"],
+Cell[5786, 150, 1532, 24, 107, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[7355, 179, 104, 2, 27, "Input"],
+Cell[7462, 183, 367, 5, 45, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[7866, 193, 63, 1, 27, "Input"],
+Cell[7932, 196, 129, 2, 43, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[8098, 203, 60, 1, 27, "Input"],
+Cell[8161, 206, 53, 1, 27, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[8251, 212, 74, 1, 27, "Input"],
+Cell[8328, 215, 53, 1, 27, "Output"]
+}, Open  ]],
+Cell[8396, 219, 54, 1, 27, "Input"]
+}
+]
+*)
+
+
+
+(*******************************************************************
+End of Mathematica Notebook file.
+*******************************************************************)
+

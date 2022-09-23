@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href="../../bootstrap.min.css" rel="stylesheet" type="text/css">
+<title>Introduction to Algoriithm Analysis</title>
+</head>
+<body>
+<div class="container">
+<h3>A Question</h3>
+<p>Here is an important question in computer science.</p>
+<p class="text-center">If an algorithm takes one second to process <i>N</i> items, </p>
+<p class="text-center">how much time will it take to process 100 <i>N</i> items?</p>
+<p>The most naive response to this question is to assume that the run time for an algorithm scales directly with the size of the data set. If <i>N</i> items take 1 second to process, 100 <i>N</i> items must take 100 seconds to process.</p>
+<p>As we will see, this is almost never the case. For most algorithms, as the size of the data set to be processed increases, the run time of the algorithm does not grow in a simple, linear fashion.</p>
+<p>In these notes we will begin to explore techniques for estimate the rate of growth for run times for common algorithms.</p>
+<h3>A first definition</h3>
+<p>Here is the first definition we are going to encounter in this discussion.</p>
+<p class="text-center">The time that a particular algorithm needs to process a data set with <i>N</i> items in it is <i>T</i>(<i>N</i>).</p>
+<p>Unfortunately, this simple definition immediately raises a number of important questions. Here are some observations that will complicate this definition.</p>
+<ol>
+<li>Processing time may depend on factors beyond the data set and the algorithm. For example, the speed of the CPU that we run the algorithm on and the language used to code the algorithm may make a difference in the run time.</li>
+<li>For many algorithms, there may be many different input data sets having <i>N</i> items, and many of these data sets may cause the run time of the algorithm to vary.</li>
+</ol>
+<p>For these reasons and others that we will encounter as we go along, <i>T</i>(<i>N</i>) is not the most useful way to get at our central concerns. Also, thinking back to the question I asked at the start of these notes, what is going to concern us more than <i>T</i>(<i>N</i>) is the <i>rate of growth</i> of <i>T</i>(<i>N</i>) as <i>N</i> grows.</p>
+<h3>Analyzing an algorithm</h3>
+<p>The questions and ideas I have introduced so far are all part of an important area in computer science, <i>algorithm analysis</i>. The best way to begin to explain what algorithm analysis is is to start by showing a concrete example. Here is the pseudocode for a common sorting algorithm, <i>selection sort</i>.</p>
+<pre>
+void sort(int A[],int N) {
+  int n = 0;
+  while(n &lt; N) {
+    int smallest = A[n];
+    int where = n;
+    int k = n + 1;
+    while(k &lt; N) {
+      if(A[k] &lt; smallest) {
+        smallest = A[k];
+        where = k;
+      }
+      k = k + 1;
+    }
+    A[where] = A[n];
+    A[n] = smallest;
+    n = n + 1;
+    }
+}
+</pre>
+<p>The next step in the analysis is to annotate this source code with information about how much time each of these statements takes to run, along with a count of how many times the statements get executed.</p>
+<pre>
+void sort(int A[],int N) {
+  int n = 0;                // c<sub>1</sub> , 1 time
+  while(n &lt; N) {            // <i>c</i><sub>2</sub> , <i>N</i> + 1 times
+    int smallest = A[n];    // <i>c</i><sub>3</sub> , <i>N</i> times
+    int where = n;          // <i>c</i><sub>4</sub> , <i>N</i> times
+    int k = n + 1;          // <i>c</i><sub>5</sub> , <i>N</i> times
+    while(k &lt; N) {          // <i>c</i><sub>6</sub> , <img src="chapterTwo1.png"/> (<i>N</i> - <i>n</i>) times
+      if(A[k] &lt; smallest) { // <i>c</i><sub>7</sub> , <img src="chapterTwo2.png"/> (<i>N</i> - <i>n</i> - 1) times
+        smallest = A[k];    // <i>c</i><sub>8</sub> , ?? times
+        where = k;          // <i>c</i><sub>9</sub> , ?? times
+      }
+      k = k + 1;            // <i>c</i><sub>10</sub> , <img src="chapterTwo3.png"/> (<i>N</i> - <i>n</i> - 1) times
+    }
+    A[where] = A[n];        // <i>c</i><sub>11</sub> , <i>N</i> times
+    A[n] = smallest;        // <i>c</i><sub>12</sub> , <i>N</i> times
+    n = n + 1;              // <i>c</i><sub>13</sub> , <i>N</i> times
+    }
+}
+</pre>
+<p>One immediate uncertainty here is the number of times the statements in the body of the if get executed. Since the test in the if statement will not always evaluate to true, these statements will get run for a number of times that is impossible to determine. The best we can do with these statements is to place an upper bound on how many times those statements get executed. An upper bound on the number of times the statements in the body get executed is the number of times the if test gets evaluated.</p>
+<p>Next, we need to simplify the summatations that appear above. For this you will need to remember standard techniques for computing summations that you learned in calculus.</p>
+<p class="text-center"><img src="chapterTwo4.png"/></p>
+<p class="text-center"><img src="chapterTwo5.png"/></p>
+<p class="text-center"><img src="chapterTwo6.png"/></p>
+<p class="text-center"><img src="chapterTwo7.png"/></p>
+<p class="text-center"><img src="chapterTwo8.png"/></p>
+<p>Likewise,</p>
+<p class="text-center"><img src="chapterTwo9.png"/></p>
+<p class="text-center"><img src="chapterTwo10.png"/></p>
+<p class="text-center"><img src="chapterTwo11.png"/></p>
+<p>Here again is the annotated source code with the summations simplified and the total run time for each individual statement shown off to the right, taking into account how many times each statement gets executed.</p>
+<pre>
+void sort(int A[],int N) {
+  int n = 0;                // c<sub>1</sub>
+  while(n &lt; N) {            // <i>c</i><sub>2</sub> (<i>N</i> + 1)
+    int smallest = A[n];    // <i>c</i><sub>3</sub> <i>N</i>
+    int where = n;          // <i>c</i><sub>4</sub> <i>N</i>
+    int k = n + 1;          // <i>c</i><sub>5</sub> <i>N</i>
+    while(k &lt; N) {          // <i>c</i><sub>6</sub> <img src="chapterTwo12.png"/>
+      if(A[k] &lt; smallest) { // <i>c</i><sub>7</sub> <img src="chapterTwo13.png"/>
+        smallest = A[k];    // &#8804; <i>c</i><sub>8</sub>  <img src="chapterTwo14.png"/>
+        where = k;          // &#8804; <i>c</i><sub>9</sub> <img src="chapterTwo15.png"/>
+      }
+      k = k + 1;            // <i>c</i><sub>10</sub> <img src="chapterTwo16.png"/>
+    }
+    A[where] = A[n];        // <i>c</i><sub>11</sub> <i>N</i>
+    A[n] = smallest;        // <i>c</i><sub>12</sub> <i>N</i>
+    n = n + 1;              // <i>c</i><sub>13</sub> <i>N</i>
+    }
+}
+</pre>
+<p>We can now total up the run time for all statements in algorithm. To emphasize this total's dependence on <i>N</i>, I will rearrange the terms in the grand total:</p>
+<p class="text-center"><img src="chapterTwo17.png"/></p>
+<p class="text-center"><img src="chapterTwo18.png"/></p>
+<p class="text-center">+ (<i>c</i><sub>1</sub> + <i>c</i><sub>2</sub>)</p>
+<p>Since all of these constants are unknown to us, we can consolidate our ignorance into some simpler coefficients.</p>
+<p class="text-center"><i>T</i>(<i>N</i>) &#8804; <i>C</i><sub>1</sub> <i>N</i><sup>2</sup> + <i>C</i><sub>2</sub> <i>N</i> + <i>C</i><sub>3</sub></p>
+<p>We can now say something concrete about the rate of growth of <i>T</i>(<i>N</i>) for this algorithm: the run time grows quadratically as the size of the list to be sorted grows.</p>
+<h3>Big-O Notation</h3>
+<p>As we saw in the example above, in most cases where we attempt to estimate the run time of an algorithm we will end up developing an upper bound for the run time. This motivates the following important definition:</p>
+<p>A function <i>f</i>(<i>n</i>) is said to be <i>O</i>(<i>g</i>(<i>n</i>)) if there exists a constant <i>C</i> and an <i>N</i><sub>0</sub> &gt; 0 such that <i>f</i>(<i>n</i>) &#8804; <i>C</i> <i>g</i>(<i>n</i>) for all <i>n</i> &#8805; <i>N</i><sub>0</sub>.</p>
+<p>Here is a picture from the textbook that illustrates the key ideas in this definition.</p>
+<p class="text-center"><img src="chapterTwo19.png"/></p>
+<p>The main idea here is that we want to use a simple function, <i>g</i>(<i>n</i>), to put a tight upper bound on the growth of some more complex function, <i>f</i>(<i>n</i>).</p>
+<p>The <i>T</i>(<i>N</i>) we computed for selection sort is <i>O</i>(<i>N</i><sup>2</sup>), because</p>
+<p class="text-center"><i>T</i>(<i>N</i>) &#8804; <i>C</i><sub>1</sub> <i>N</i><sup>2</sup> + <i>C</i><sub>2</sub> <i>N</i> + <i>C</i><sub>3</sub> &#8804; <i>C</i> <i>N</i><sup>2</sup></p>
+<p>for some appropriate choice of <i>C</i>.</p>
+<h3>Another Example</h3>
+<p>In chapter 2 in the textbook you will find a similar analysis for the insertion sort algorithm.</p>
+<p>Here is some annotated pseudocode for insertion sort.</p>
+<p class="text-center"><img src="chapterTwo20.png"/></p>
+<p>An interesting difference between selection sort and insertion sort is the nature of the uncertainty in the run time of both algorithms. A small uncertainty in selection sort is how many times the statements in the body of the if statement get executed. This uncertainty is small, because even if we assume that the statements in the body of the if never get run, we will still arrive at a bound for the run time that is <i>O</i>(<i>N</i><sup>2</sup>), because we know that the test in the if statement has to be executed a predictable number of times, no matter what the data set looks like. Insertion sort contains a larger uncertainty. The uncertainty in insertion sort is how many times the while loop gets executed on each iteration of the for loop.</p>
+<p>About all we can do with the while loop in insertion sort is to place bounds on how many times it runs on each iteration of the outer loop. The lower bound is that the test in the while loop immediately evaluates to false when we first encounter it. This results in <i>best case </i>run time estimate for insertion sort that is <i>O</i>(<i>N</i>). The upper bound is that the while loop keeps running until <code>i</code> reaches 0 every single time we go through the outer loop. This results in a <i>worst case</i> run time estimate for insertion sort that is <i>O</i>(<i>N</i><sup>2</sup>).</p>
+<p>A more useful question to ask about insertion sort is how many times the inner loop runs <i>on average</i>. To answer this question we will need to bring in some ideas from probability theory. We will return to this question when we get to chapter 5.</p>
+<h3>Analyzing a recursive algorithm</h3>
+<p>Here is pseudocode for another sorting algorithm, merge sort.</p>
+<p class="text-center"><img src="chapterTwo21.png"/></p>
+<p class="text-center"><img src="chapterTwo22.png"/></p>
+<p>Merge sort requires a different sort of analysis because it is a recursive algorithm.</p>
+<p>Because merge sort is a divide and conquer type of algorithm, it does its work by splitting the list to be sorted into halves and then calling itself recursively on both halves. This naturally leads to a <i>recurrence relation</i> for the run time of merge sort:</p>
+<p class="text-center"><i>T</i>(<i>N</i>) = <i>T</i><sub><i>MERGE</i></sub>(<i>N</i>) + 2 <i>T</i>(<i>N</i>/2)</p>
+<p>It is an easy exercise to determine that the run time for the MERGE function is <i>O</i>(<i>N</i>). This makes the recurrence relation for the full merge sort</p>
+<p class="text-center"><i>T</i>(<i>N</i>) = <i>c</i> <i>N</i> + 2 <i>T</i>(<i>N</i>/2)</p>
+<p>The picture below shows one method we can use to analyze this recurrence relation. The picture shows an expanded version of the call tree for merge sort, annotated with the time used by the merges in each recursive call.</p>
+<p class="text-center"><img src="chapterTwo23.png"/></p>
+<p>An interesting observation about the time used by the merges at each level of the call tree is that they sum to <i>c</i> <i>n</i> across the nodes in each level of the call tree. Thus, the total time used by all of the merges throughout merge sort is just <i>c</i> <i>n</i> times the number of levels in the call tree, which is bounded by <i>lg</i> <i>n</i>. This tells us that</p>
+<p class="text-center"><i>T</i>(<i>N</i>) &#8804; <i>c</i> <i>N</i> <i>lg</i> <i>N</i> + <i>c</i> <i>n</i></p>
+<p>which tells us that merge sort is <i>O</i>(<i>N</i> <i>lg</i> <i>N</i>).</p>
+</div>
+</body>
+</html>

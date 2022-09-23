@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href="../../bootstrap.min.css" rel="stylesheet" type="text/css">
+<title>OpenMP</title>
+</head>
+<body>
+<div class="container">
+<p>Chapter 27 introduces a trio of useful new pseudocode keywords, <code>spawn</code>, <code>sync</code>, and <code>parallel for</code>. We have seen a few examples of how these simple constructs allow us to form powerful parallel implementations of common algorithms.</p>
+<p>Here is the pseudocode for the parallelized version of merge sort from chapter 27.</p>
+<pre>
+MERGE-SORT'(A,p,r)
+  if p &lt; r
+    q = (p+r)/2
+    spawn MERGE-SORT'(A,p,q)
+    MERGE-SORT'(A,q+1,r)
+    sync
+    P-MERGE(A,p,q,r)
+
+P-MERGE(<i>T</i>,<i>p</i><sub>1</sub>,<i>r</i><sub>1</sub>,<i>p</i><sub>2</sub>,<i>r</i><sub>2</sub>,<i>A</i>,<i>p</i><sub>3</sub>)
+  <i>n</i><sub>1</sub> = <i>r</i><sub>1</sub> - <i>p</i><sub>1</sub> + 1
+  <i>n</i><sub>2</sub> = <i>r</i><sub>2</sub> - <i>p</i><sub>2</sub> + 1
+  if <i>n</i><sub>1</sub> &lt; <i>n</i><sub>2</sub>
+    exchange <i>p</i><sub>1</sub> with <i>p</i><sub>2</sub>
+    exchange <i>r</i><sub>1</sub> with <i>r</i><sub>2</sub>
+    exchange <i>n</i><sub>1</sub> with <i>n</i><sub>2</sub>
+  if <i>n</i><sub>1</sub> == 0
+    return
+  else
+    <i>q</i><sub>1</sub> = (<i>p</i><sub>1</sub>+<i>r</i><sub>1</sub>)/2
+    <i>q</i><sub>2</sub> = BINARY-SEARCH(T[<i>q</i><sub>1</sub>],T,<i>p</i><sub>2</sub>,<i>r</i><sub>2</sub>)
+    <i>q</i><sub>3</sub> = <i>p</i><sub>3</sub> + (<i>q</i><sub>1</sub> - <i>p</i><sub>1</sub>) + (<i>q</i><sub>2</sub> - <i>p</i><sub>2</sub>)
+    A[<i>q</i><sub>3</sub>] = T[<i>q</i><sub>1</sub>]
+    spawn P-MERGE(<i>T</i>,<i>p</i><sub>1</sub>,<i>q</i><sub>1</sub>-1,<i>p</i><sub>2</sub>,<i>q</i><sub>2</sub>-1,<i>A</i>,<i>p</i><sub>3</sub>)
+    P-MERGE(<i>T</i>,<i>q</i><sub>1</sub>+1,<i>r</i><sub>1</sub>,<i>q</i><sub>2</sub>,<i>r</i><sub>2</sub>,<i>A</i>,<i>q</i><sub>3</sub>+1)
+    sync
+</pre>
+<p>In the programming assignment below I am going to ask you write a C++ program that implements another parallel algorithm.</p>
+<p>OpenMP is a system for writing parallel programs in C++. OpenMP is a combination of a set of compiler extentions and an OpenMP library. The compiler extentions allow you to implement parallel programming features in your program through the use of compiler directives, specifically <i>pragmas</i>.</p>
+<p>Here is <a href="merge.txt">source code for a C++ version of the parallel merge sort algorithm</a>.</p>
+<p>The OpenMP pragmas embedded in this code are fairly easy to use.</p>
+<p>To set up a parallel for loop we use a construct like this:</p>
+<pre>
+#pragma omp parallel for
+for(i = 0;i &lt; n;i++)
+  A[i] = 0;
+</pre>
+<p>This is simple a special omp pragma placed before the start of the for loop.</p>
+<p>To set up a spawn/sync arrangement analogous to</p>
+<pre>
+x = spawn f(i)
+y = f(i-1)
+sync
+</pre>
+<p>we use the OpenMP construct</p>
+<pre>
+#pragma omp parallel sections
+{
+#pragma omp section
+x = f(i);
+#pragma omp section
+y = f(i-1);
+}
+</pre>
+<p>The combination of the <code>parallel sections</code> pragma and the curly braces sets up an implicit <code>sync</code> that takes place after the right curly brace.</p>
+<p>When you use a parallel for or a section to move some code to another thread running on a different core, you will want to use some care to make sure that you distinguish variables that are shared across all threads from variables are meant to be used exclusively in a single thread. You make this distinction by adding <code>shared</code> and <code>private</code> variable directives to your OpenMP pragmas. If you look back at the code for parallel merge sort above you will see that in each case I was careful to indicated which variables are shared and which are private.</p>
+<h3>Turning on OpenMP in your own compiler</h3>
+<p>Many modern development environments offer support for OpenMP.</p>
+<p>In Visual Studio you can turn on OpenMP support by right-clicking on your project in the solution explorer and selecting Properties... Go to C/C++/Language and find the option for OpenMP support. Set that option to Yes to enable OpenMP in your project.</p>
+<p>On Mac OS X you have two options: you can enable OpenMP support in XCode, or you can use the gcc compiler from the command line. <a href="http://antonmenshov.com/2017/09/09/clang-openmp-setup-in-xcode/">This web page</a> gives instructions on how to enable OpenMP support in XCode. Alternatively, you can use homebrew to install the gcc compiler tools and use gcc to compile your OpenMP program from a terminal command prompt. Here are instructions on how to do that:</p>
+<ol>
+<li>Go to <a href="https://brew.sh/">the Homebrew home page</a> to get instructions on how to install the Homebrew package manager for OS X.</li>
+<li>Open a terminal window and type the command <code>brew install gcc</code>.</li>
+<li>As Homebrew installs gcc, make a note of what version of gcc you got.</li>
+<li>Change directories to the directory where your merge sort source code file is located.</li>
+<li>To compile the merge sort example code from above on the command line use the command <code>g++-9 -fopenmp main.cpp -o merge</code> with the number 9 replaced with your version of gcc.</li>
+<li>To run the merge sort example from the command line type <code>./merge</code></li>
+</ol>
+<h3 id="exercise">Programming Assignment</h3>
+<p>Start by reading problem 27-5 at the end of the chapter 27. In this problem you are going to implement a parallel version of the dynamic programming solution to the longest common subsequence problem discussed in chapter 15.</p>
+<p>Here is what you need to do.</p>
+<ol>
+<li>Start by generating two random arrays of 1024 characters each containing just the letters 'a'-'d'.</li>
+<li>Code the LCS solution from chapter 15 and have it compute the longest common subsequence of your two random strings. Print this longest common subsequence. For comparison purposes, time how long it takes your algorithm to solve the problem.</li>
+<li>Code a second LCS solution that uses the parallel computation strategy outlined in exercise 27-5. In your solution you should divide the tables into 256 subarrays of size 64 by 64 and fill those subarrays using as much parallelism as you can produce. Once again, have this solution print the longest common subsequence you find and report how long it took the parallel version to reach that solution.</li>
+</ol>
+<p>To make it easier for you to work with two dimensional tables I have constructed a Matrix class in C++ that implements a two dimensional table. You can access the cells of the table by using code like this:</p>
+<pre>
+Matrix&lt;int&gt; T(1024,1024);
+T(12,54) = 3; // Set the entry in row 13 and column 55 to 3
+</pre>
+<p>Here is the <a href="matrix.txt">header file containing the code for this class</a>.</p>
+</div>
+</body>
+</html>

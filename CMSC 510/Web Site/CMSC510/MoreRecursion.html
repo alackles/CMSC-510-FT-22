@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href="../bootstrap.min.css" rel="stylesheet" type="text/css">
+<title>More Recursion</title>
+</head>
+<body>
+<div class="container">
+<h3>Subset Sum</h3>
+<pre>
+// Return true if S[1..k] has a subset that sums to t
+subset-sum(S,k,t)
+  if t == 0 return true
+  if k == 0 return false
+  if S[k] &lt;= t and subset-sum(S,k-1,t-S[k])
+    return true
+</pre>
+<p><code>  return subset-sum(S,k-1,t)</code></p>
+<h3>Print Permutations</h3>
+<pre>
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;fstream&gt;
+
+void printSet(const std::vector&lt;int&gt;&amp; A, std::ofstream&amp; out) {
+  out &lt;&lt; '[';
+  auto itr = A.rbegin();
+  out &lt;&lt; *itr;
+  for (itr++; itr != A.rend(); itr++)
+    out &lt;&lt; ',' &lt;&lt; *itr;
+  out &lt;&lt; ']' &lt;&lt; std::endl;
+}
+
+void swap(std::vector&lt;int&gt;&amp; A, int i, int j) {
+  if (i != j) {
+    int temp = A[i];
+    A[i] = A[j];
+    A[j] = temp;
+  }
+}
+
+void permute(std::vector&lt;int&gt;&amp; A, int k, std::ofstream&amp; out) {
+  if (k == A.size() - 1)
+    printSet(A,out);
+  else {
+    for (int j = k; j &lt; A.size(); j++) {
+      swap(A, j, k);
+      permute(A, k + 1,out);
+      swap(A, j, k);
+    }
+  }
+}
+
+void printPermutations(std::vector&lt;int&gt;&amp; A, std::ofstream&amp; out) {
+  permute(A, 0, out);
+}
+
+int main()
+{
+  std::vector&lt;int&gt; V;
+  for (int n = 1; n &lt;= 6; n++)
+    V.push_back(n);
+
+  std::ofstream out;
+  out.open(&quot;permutations.txt&quot;);
+
+  printPermutations(V, out);
+
+  out.close();
+  return 0;
+}
+</pre>
+<h3>Print All Subsets of a Certain Size</h3>
+<pre>
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;fstream&gt;
+
+void printSet(const std::vector&lt;int&gt;&amp; A, std::ofstream&amp; out) {
+  out &lt;&lt; '[';
+  auto itr = A.rbegin();
+  out &lt;&lt; *itr;
+  for (itr++; itr != A.rend(); itr++)
+    out &lt;&lt; ',' &lt;&lt; *itr;
+  out &lt;&lt; ']' &lt;&lt; std::endl;
+}
+
+void printHelper(std::vector&lt;int&gt; &amp;V, int k, std::vector&lt;int&gt; &amp;S, std::ofstream&amp; out) {
+  if (k == 0)
+    printSet(S,out);
+  else if (k &lt;= V.size()) {
+    int last = V.back();
+    V.pop_back();
+    // Two alternatives: use last or don't use last
+    // Alternative one: don't use last
+    printHelper(V, k, S, out);
+    // Alternative two: do use last
+    S.push_back(last);
+    printHelper(V, k - 1, S, out);
+    S.pop_back();
+    V.push_back(last);
+  }
+}
+
+void printAllSubsets(std::vector&lt;int&gt; &amp;V, int k,std::ofstream&amp; out) {
+  std::vector&lt;int&gt; S;
+  printHelper(V, k, S,out);
+}
+
+int main()
+{
+  std::vector&lt;int&gt; V;
+  for (int n = 1; n &lt;= 8; n++)
+    V.push_back(n);
+
+  std::ofstream out;
+  out.open(&quot;subsets.txt&quot;);
+
+  printAllSubsets(V, 5, out);
+
+  out.close();
+  return 0;
+}
+</pre>
+</div>
+</body>
+</html>
