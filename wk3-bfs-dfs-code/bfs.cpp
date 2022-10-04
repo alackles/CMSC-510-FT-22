@@ -6,10 +6,11 @@
 //      node, color, distance, parent node
 class Vertex {
     public:
-        int node; 
         std::string color = "white";
         int dist;
-        int prev;    
+        int prev;
+        int t_discover;
+        int t_finished;    
 };
 
 // Create Graph class with:
@@ -17,13 +18,15 @@ class Vertex {
 //      BFS
 class Graph {
     int size;
-    std::vector<std::list<int>> adj;
 
     public:
+        std::vector<std::list<int>> adj;
         std::vector<Vertex> V;
         Graph(int size);
         void addEdge(int src, int dest);
         void BFS(int s);
+        void DFS();
+        void DFS_Visit(int s);
 };
 
 Graph::Graph(int size) {
@@ -50,6 +53,7 @@ void Graph::BFS(int s) {
         // for (it = adj[u].begin(); it != adj[u].end(); ++it) {
         //     i = *it
         //}
+        // adj[u] = <2, 3, 4>
         for (auto i : adj[u]) {
             if (V[i].color == "white") {
                 V[i].color = "grey";
@@ -63,18 +67,38 @@ void Graph::BFS(int s) {
     std::cout << "END" << std::endl;
 }
 
+void Graph::DFS() {
+    int time = 0;
+    for (int i = 0; i != adj.size(); i++) {
+        if (V[i].color == "white") {
+            DFS_Visit(i);
+        }
+    }
+}
+
+void Graph::DFS_Visit(int s) {
+
+}
+
 // define addEdge
 // define BFS
 
 // main function: create graph & run BFS
 
 int main() {
+    int i;
+    i = 0;
+
+    std::vector<std::vector<int>> my_vec(5);
+    my_vec[0].push_back(1);
+    my_vec[0].push_back(3);
+    
+
     Graph g(5);
     g.addEdge(0,1);
     g.addEdge(0,3);
     g.addEdge(1,2);
     g.addEdge(2,4);
     g.addEdge(3,1);
-    g.BFS(0);
     std::cout << g.V[4].prev << std::endl;
 }
