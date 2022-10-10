@@ -1,12 +1,12 @@
 # Fdb version 3
-["pdflatex"] 1665158487 "/home/acacia/Documents/teaching/AY-22-23/fall/CMSC510/wk4-shortest-path/wk4-shortest-path.tex" "wk4-shortest-path.pdf" "wk4-shortest-path" 1665158487
+["pdflatex"] 1665170350 "/home/acacia/Documents/teaching/AY-22-23/fall/CMSC510/wk4-shortest-path/wk4-shortest-path.tex" "wk4-shortest-path.pdf" "wk4-shortest-path" 1665170351
   "../img//djikstra-pseudo.png" 1665157950 62199 be8801165bc604c468a00d7352251841 ""
   "../img//djikstra.png" 1665157966 129593 3325e2f7f58754a20cad4f9a59803656 ""
   "../img//ssp-bellman-ford-pseudo.png" 1665155242 39117 322e922cb27bfafcb1471a9e89b1cc64 ""
   "../img//ssp-bellman-ford.png" 1665155253 90414 9cdae109c3d1aa72b03a1d35617b409f ""
   "../img//ssp-initialize-pseudo.png" 1665152403 16718 4201fe5343699995cfa043fc73e86cc6 ""
   "../img//ssp-relax-pseudo.png" 1665154553 13356 b48cc39b839d0c286235c48e5d947e6e ""
-  "/home/acacia/Documents/teaching/AY-22-23/fall/CMSC510/wk4-shortest-path/wk4-shortest-path.tex" 1665158487 7787 bf1ea240e95d518d7d7449b8295491b3 ""
+  "/home/acacia/Documents/teaching/AY-22-23/fall/CMSC510/wk4-shortest-path/wk4-shortest-path.tex" 1665170350 7476 301e5fffe397a0572995b5c645362f38 ""
   "/usr/share/texmf-dist/fonts/map/fontname/texfonts.map" 1650183167 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm" 1650183167 1324 c910af8c371558dc20f2d7822f66fe64 ""
   "/usr/share/texmf-dist/fonts/tfm/public/cm/cmmi12.tfm" 1650183167 1524 4414a8315f39513458b80dfc63bff03a ""
@@ -51,8 +51,8 @@
   "/usr/share/texmf-dist/web2c/texmf.cnf" 1650183167 39911 2da6c67557ec033436fe5418a70a8a61 ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1663694548 334215 ad2feb41952e3720830b65f83a01c5b0 ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1663694540 2927668 a5dc63829ddd3c0207339bf3bddca23d ""
-  "wk4-shortest-path.aux" 1665158487 32 2d1df76398b3c48c6419a45a7331db2d "pdflatex"
-  "wk4-shortest-path.tex" 1665158487 7787 bf1ea240e95d518d7d7449b8295491b3 ""
+  "wk4-shortest-path.aux" 1665170351 32 2d1df76398b3c48c6419a45a7331db2d "pdflatex"
+  "wk4-shortest-path.tex" 1665170350 7476 301e5fffe397a0572995b5c645362f38 ""
   (generated)
   "wk4-shortest-path.aux"
   "wk4-shortest-path.log"

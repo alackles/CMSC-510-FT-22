@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022/Arch Linux) (preloaded format=pdflatex 2022.9.20)  7 OCT 2022 11:01
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022/Arch Linux) (preloaded format=pdflatex 2022.9.20)  7 OCT 2022 14:19
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -215,11 +215,7 @@ File: ../img//ssp-bellman-ford.png Graphic file (type png)
 <use ../img//ssp-bellman-ford.png>
 Package pdftex.def Info: ../img//ssp-bellman-ford.png  used on input line 129.
 (pdftex.def)             Requested size: 469.75502pt x 246.05772pt.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[4 <../img//ssp-bellman-ford-pseudo.png (PNG copy)>] [5 <../img//ssp-bellman-ford.png (PNG copy)>] (./wk4-shortest-path.aux) ) 
+ [4 <../img//ssp-bellman-ford-pseudo.png (PNG copy)> <../img//ssp-bellman-ford.png (PNG copy)>] [5] (./wk4-shortest-path.aux) ) 
 Here is how much of TeX's memory you used:
  2780 strings out of 478238
  45132 string characters out of 5850456
@@ -229,7 +225,7 @@ Here is how much of TeX's memory you used:
  1141 hyphenation exceptions out of 8191
  55i,6n,62p,605b,221s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on wk4-shortest-path.pdf (5 pages, 452008 bytes).
+Output written on wk4-shortest-path.pdf (5 pages, 451814 bytes).
 PDF statistics:
  61 PDF objects out of 1000 (max. 8388607)
  33 compressed objects within 1 object stream

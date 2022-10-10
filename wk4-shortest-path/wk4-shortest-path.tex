@@ -110,7 +110,7 @@ You are trying to find the most energy-efficient route from your house to your w
 
 Will Dijkstra's algorithm still work here?
 
-What considerations would you have to make so that you can create an algorithm to accomplish this task? 
+What considerations would you have to make for an algorithm that can accomplish this task?
 
 \subsection*{Cycles}
 
@@ -118,7 +118,7 @@ Could we include a negative-weight cycle in our shortest path? That would probab
 
 \section*{Bellman-Ford Algorithm}
 
-For this case, we need the Bellman-Ford Algorithm. This algorithm does almost exactly what your first instinct might be: check every edge to and from every vertex. The difference is that it doesn't specifically select a vertex to start from every time; it just checks every edge for as many vertices as there are other than the source.
+For this case, we need the Bellman-Ford Algorithm. This algorithm doesn't specifically select a vertex to start from every time; it just checks every edge for as many vertices as there are other than the source.
 
 
 \begin{figure}[h]
@@ -132,7 +132,5 @@ For this case, we need the Bellman-Ford Algorithm. This algorithm does almost ex
 Note that it is \textit{not choosing a vertex} each time it runs. The reason $x$ and $z$ vertices don't get updated here is not because they haven't been considered. It's because when they were considered, the distance between $t$ and $x$ was infinity plus infinity, so no update was performed. That is not clear from the picture, but the figure caption in the book shows it. 
 
 As you might imagine, an algorithm that runs on every edge for every vertex is not a particularly efficient algorithm, but it is one that is equipped to handle negative weights. 
-
-If we ``relax'' this requirement a little bit, we can start to explore other possible algorithms for shortest paths that only take into account positive weights on edges. 
 
 \end{document}
