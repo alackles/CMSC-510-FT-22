@@ -17,7 +17,7 @@ random.seed(100)
 lcs_length = 20
 dna = ['A', 'C', 'G', 'T']
 lcs = random.choices(dna, k=lcs_length)
-print(lcs)
+print("".join(lcs))
 
 x = generate_superseq(lcs, dna, 30, 40)
 y = generate_superseq(lcs, dna, 30, 40)
